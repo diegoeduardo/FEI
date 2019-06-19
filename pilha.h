@@ -7,17 +7,29 @@
 //CRIANDO UMA PILHA DO TAMANHO 1000
 int const MAXTAM = 1000;
  
-int Pilha[MAXTAM];
+int PilhaDados[MAXTAM];
 int Topo;
+//classe Pilha
+class Pilha{
+    public:
+    void PilhaConstrutor();
+    bool ChecaPilhaVazia();
+    bool ChecarPilhaCheia();
+    bool InsereNaPilha(int valor);
+    bool RemoveDaPilha(int &valor);
+    bool ConsultaTopoPilha(int &valor);
+    int ChecaTamanhoPilha();
+    
+};
 
 //metodo contrutor
-void PilhaConstrutor(){
+void Pilha::PilhaConstrutor(){
     //declaro o topo como -1, pilha vazia = -1 , pois o vetor comeca a contar do numero 0
     Topo = -1;
     }
 
 //metodo para checar se a pilha esta vazia    
-bool ChecaPilhaVazia(){
+bool Pilha::ChecaPilhaVazia(){
     if (Topo==-1)
         return true;
     else 
@@ -25,7 +37,7 @@ bool ChecaPilhaVazia(){
     }    
 
 //metodo para checar se a pilha esta cheia ou nao
-bool ChecarPilhaCheia(){
+bool Pilha::ChecarPilhaCheia(){
     if (Topo==MAXTAM-1)
     return true;
     else 
@@ -33,39 +45,39 @@ bool ChecarPilhaCheia(){
 }
 
 //metodo push - inserir na pilha -- recebendo o valor que quero inserir na pilha
-bool InsereNaPilha(int valor){
+bool Pilha::InsereNaPilha(int valor){
     //fazer o teste para checar se a pilha estiver cheia
     if(ChecarPilhaCheia()){
         return false;
     }else {
         Topo++;
-        Pilha[Topo] = valor;
+        PilhaDados[Topo] = valor;
         return true;
     }
 }
 
 //metodo pop - retirar / desempilhar da pilha
-bool RemoveDaPilha(int &valor){
+bool Pilha::RemoveDaPilha(int &valor){
     if(ChecaPilhaVazia() ){
         return false;
     }else{
-        valor=Pilha[Topo];
+        valor=PilhaDados[Topo];
         Topo--;
         return true;
     }
     }
 
 
-bool ConsultaTopoPilha(int &valor){
+bool Pilha::ConsultaTopoPilha(int &valor){
     if(ChecaPilhaVazia() ){
         return false;
         }else{
-            valor=Pilha[Topo];
+            valor=PilhaDados[Topo];
             return true;
             }
     }
     
-int ChecaTamanhoPilha(){
+int Pilha::ChecaTamanhoPilha(){
     // Se a pilha tiver um valor (na posicao 0) entao colocamos +1 para ele pegar essa posicao
     return Topo+1;  
     }    
@@ -74,27 +86,29 @@ int main(){
     int valor;
     
     //chamaando o construtor
-    PilhaConstrutor();
+    //PilhaConstrutor();
+    Pilha pilha;
+    
     
     //inserindo
-    InsereNaPilha(5);
-    InsereNaPilha(2);
-    InsereNaPilha(4);
-    InsereNaPilha(1);
-    InsereNaPilha(8);
+    pilha.InsereNaPilha(5);
+    pilha.InsereNaPilha(2);
+    pilha.InsereNaPilha(4);
+    pilha.InsereNaPilha(1);
+    pilha.InsereNaPilha(8);
     
     //quantidade antes de desempilhar
-    printf("\n Quantidade de itens na pilha %d \n\n\n", ChecaTamanhoPilha() );
-    while(RemoveDaPilha(valor) ) {
+    printf("\n Quantidade de itens na pilha %d \n\n\n", pilha.ChecaTamanhoPilha() );
+    while(pilha.RemoveDaPilha(valor) ) {
         printf("\n %d \n", valor);
     }
-    printf("\n Quantidade de itens na pilha %d \n\n\n", ChecaTamanhoPilha() );
+    printf("\n Quantidade de itens na pilha %d \n\n\n", pilha.ChecaTamanhoPilha() );
     
-    InsereNaPilha(2);
+    pilha.InsereNaPilha(2);
     
-    ConsultaTopoPilha(valor);
+    pilha.ConsultaTopoPilha(valor);
     printf("\n %d \n", valor);
-    printf("\n Quantidade de itens na pilha %d \n\n\n", ChecaTamanhoPilha() );
+    printf("\n Quantidade de itens na pilha %d \n\n\n", pilha.ChecaTamanhoPilha() );
     
     system("pause");
     return 0;
