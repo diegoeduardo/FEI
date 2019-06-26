@@ -108,26 +108,40 @@ public:
 	//passamos o valor a ser inserido
 	void inserir_inicio(int valorArmazenado)
 	{
-		//para inserir no lugar certo
+		//para inserir na lista tenho que criar um novo nó - entao instancio o novo nó
 		contNode* novo_no = new contNode(valorArmazenado);
-
+		
+		// para inserir tanto no inicio como no fim, nao preciso percorrer
+		//mas preciso ter atencao para inserir no local certo
+		// entao preciso setar a referencia para o novo nó
+ 
+		//checo se esta vazia
 		if(vazia())
 		{
 			cabeca = novo_no;
 			cauda = novo_no;
 		}
+		
 		else
 		{
+	    //se vou inserir no inicio da minha lista, preciso setar o proximo nó da minha lista, 
+		//entao o proximo tem que ser a cabeça atual
+		//entao novo_no sera a cabeça,
 			novo_no->setProx(cabeca);
 			cabeca = novo_no;
 		}
 	}
 
 	// insere no final (semelhante a push_back da list)
+	// para inserir tanto no inicio como no fim, nao preciso percorrer
+	//mas preciso ter atencao para inserir no local certo
+	// entao preciso setar a referencia para o novo nó	
 	void inserir_final(int valorArmazenado)
 	{
+		//para inserir na lista tenho que criar um novo nó - entao instancio o novo nó
 		contNode* novo_no = new contNode(valorArmazenado);
-
+	     
+		//se a cabeça é igual a nulo nao tenho elementos
 		if(vazia())
 		{
 			cabeca = novo_no;
@@ -135,12 +149,15 @@ public:
 		}
 		else
 		{
+		//o proximo de cauda sera o novo nó 
+		// antes dessa linha, a cauda apontava para um null - no x
+		// fazendo isso estamos colocando a cauda apontar para esse novo item que estamos inserindo no final
 			cauda->setProx(novo_no);
 			cauda = novo_no;
 		}
 	}
 
-	// retorna o tamanho da lista
+	// metodo retorna o tamanho da lista
 	int tamanho()
 	{
 		if(vazia()) // se for vazia, entã retorna 0
@@ -149,7 +166,7 @@ public:
 		contNode* c = cabeca;
 		int tam = 0;
 		
-		// percorre a lista
+		// percorre a lista e guarda numa variavel contador 
 		do
 		{
 			c = c->obterProx();
@@ -160,7 +177,7 @@ public:
 		return tam;
 	}
 
-	// verifica se um elemento existe na lista
+	// verifica se um elemento existe na lista 
 	bool existe(int valorArmazenado)
 	{
 		contNode* c = cabeca;
@@ -236,6 +253,7 @@ public:
 	
 };
 
+//classe Pilha - herdando da classe Lista
 class Pilha  : public Lista{
 	    public:               
         Pilha();              
@@ -246,32 +264,42 @@ class Pilha  : public Lista{
         void PrintPilha();    
      
 };
-	
+//construtor da Pilha	
 Pilha::Pilha(){
 	Lista();
 }
 
+//destrutor da Pilha
 Pilha::~Pilha(){
 	 cout << "Destrutor";
 }
 
+//Metodo que checa o topo da Pilha para possibilitar a insercao nele
 int Pilha::Topo(){
+ //chamando o metodo mostrarValor da classe Lista - passando a cauda (ultimo elemento da lista ) como parametro
  mostrarValor(cauda);	
 }
 
+//metodo Pop - inserir na pilha -- sempre inserindo no final da pilha
 void Pilha::Pop(int valor){
+	//aciona o metodo insere_final da classe Lista
 	inserir_final(valor);	
 }
 
+//metodo Pop - remover na pilha - sempre o ultimo elemento a ter sido inserido
 int Pilha::Push(){
+	//aciona o metodo remover_final da classe Lista
 	removerFinal();	
 }
 
+//metodo para listar os dados da Pilha
 void Pilha::PrintPilha(){
+	//aciona o metodo mostrar  da classe Lista
 	mostrar();
 	
 }
 
+//classe Fila - herdando da classe Lista
 class Fila  : public Lista{
 	    public:               
         Fila();              
@@ -282,32 +310,39 @@ class Fila  : public Lista{
         void PrintFila();    
            
 };
-	
+//contrutor da FIla	
 Fila::Fila(){
 	Lista();
 }
 
+//destrutor da FIla
 Fila::~Fila(){
 	 cout << "Destrutor";
 }
 
+//metodo primeiro da fila
 int Fila::PrimeiroFila(){
- mostrarValor(cauda);	
+	//aciona o metodo mostrar valor da classe Lista
+  mostrarValor(cauda);	
 }
 
+//Metodo Pop da Fila - inserindo em uma das pontas da Fila - no caso inicio
 void Fila::Pop(int valor){
+	//aciona o metodo inserir_inicio da classe Lista
 	inserir_inicio(valor);	
 }
 
+//Metodo Push da Fila - Removendo em uma das pontas da Fila - no caso final
 int Fila::Push(){
+	//aciona o metodo removerFinal da classe Lista	
 	removerFinal();	
 }
 
+//metodo para listar os dados da Fila
 void Fila::PrintFila(){
+	//aciona o metodo mostrar da classe Lista
 	mostrar();
-	
 }
-
 
 int main(int argc, char *argv[])
 {
