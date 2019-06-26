@@ -43,8 +43,9 @@ public:
 		cauda = NULL;
 	}
 	
-	//contrutor da lista - com  passar valor
-	// ou seja esse elemento sera o primeiro elemento , entao cabeca recebe o novo elemento
+	// contrutor da lista - com  passar valor
+	// ou seja esse elemento sera o primeiro elemento ,
+    // entao cabeca recebe o novo elemento
 	// e calda sera igual a cabeça pois nao temos nenhum outro elemento na lista
 	Lista(int valorArmazenado)
 	{
@@ -116,14 +117,11 @@ public:
 		// entao preciso setar a referencia para o novo nó
  
 		//checo se esta vazia
-		if(vazia())
-		{
+		if(vazia())		{
 			cabeca = novo_no;
 			cauda = novo_no;
 		}
-		
-		else
-		{
+		else		{
 	    //se vou inserir no inicio da minha lista, preciso setar o proximo nó da minha lista, 
 		//entao o proximo tem que ser a cabeça atual
 		//entao novo_no sera a cabeça,
@@ -131,7 +129,6 @@ public:
 			cabeca = novo_no;
 		}
 	}
-
 	// insere no final (semelhante a push_back da list)
 	// para inserir tanto no inicio como no fim, nao preciso percorrer
 	//mas preciso ter atencao para inserir no local certo
@@ -140,15 +137,12 @@ public:
 	{
 		//para inserir na lista tenho que criar um novo nó - entao instancio o novo nó
 		contNode* novo_no = new contNode(valorArmazenado);
-	     
 		//se a cabeça é igual a nulo nao tenho elementos
-		if(vazia())
-		{
+		if(vazia())		{
 			cabeca = novo_no;
 			cauda = novo_no;
 		}
-		else
-		{
+		else		{
 		//o proximo de cauda sera o novo nó 
 		// antes dessa linha, a cauda apontava para um null - no x
 		// fazendo isso estamos colocando a cauda apontar para esse novo item que estamos inserindo no final
@@ -352,8 +346,10 @@ int main(int argc, char *argv[])
 	Pilha p;
 	Fila f;
 	
+	//RETORNO DE ERRO PELO TRATAMENTO DE ERROS
+	try {
     cout << "****************TESTANDO LISTA \n";
-	
+	 
 	if(l.vazia())
 		cout << "Lista vazia!!\n";
 	else
@@ -463,7 +459,10 @@ int main(int argc, char *argv[])
 	cout << "Mostrando primeiro da Fila!!\n";
 	f.PrimeiroFila();	
 	
-		
+	}
+	//RETORNO DE ERRO PELO TRATAMENTO DE ERROS
+	catch (int param) { cout << "int exception"; }	
+	
 	
 	return 0;
 }
